@@ -1,4 +1,4 @@
-package tiengduc123.com.q8000videosdeutschlernen.Database;
+package tiengduc123.com.q1000videosB1deutschlernen.Database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,9 +9,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 
-import tiengduc123.com.q8000videosdeutschlernen.Object.CategoryObj;
-import tiengduc123.com.q8000videosdeutschlernen.Object.ListVideoObj;
-import tiengduc123.com.q8000videosdeutschlernen.Object.VideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.CategoryObj;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.ListVideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.VideoObj;
 
 /**
  * Created by Dell on 13/03/2016.
@@ -71,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int countListVideoDetail(){
         SQLiteDatabase db = this.getReadableDatabase();
         String qr = "SELECT * " +
-                "FROM ListVideoDetail";
+                "FROM ListDetail";
         Cursor res = db.rawQuery(qr, null);
         //return res.getCount();
 
@@ -126,7 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         String qr = "SELECT * " +
-                    "FROM ListDetail where CategoryID = " + IDCate ;
+                    "FROM ListDetail where CategoryID = " + IDCate + " ORDER BY ID DESC " ;
         Cursor res;
         if(ProVersion){
             res = db.rawQuery(qr, null);
@@ -143,9 +143,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int ID = Integer.parseInt(res.getString(res.getColumnIndex("ID")));
                 String ListName = res.getString(res.getColumnIndex("ListName"));
                 String ImageKey = res.getString(res.getColumnIndex("ImageKey"));
-                if(ListName.length()>30){
+                /*if(ListName.length()>30){
                     ListName =ListName.substring(0,10)+ "...";
-                }
+                }*/
                 ListName = i++ + ". " + ListName;
                 array_list.add(new ListVideoObj(ID,"", ListName,ImageKey, Integer.parseInt(getCountVideOfList(res.getString(res.getColumnIndex("ID"))))));
                 res.moveToNext();
@@ -153,7 +153,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return array_list;
     }
-
 
     public ArrayList<ListVideoObj> GetAllNameOfList(){
         ArrayList<ListVideoObj> array_list = new ArrayList<ListVideoObj>();
@@ -177,9 +176,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int ID = Integer.parseInt(res.getString(res.getColumnIndex("ID")));
                 String ListName = res.getString(res.getColumnIndex("ListName"));
                 String ImageKey = res.getString(res.getColumnIndex("ImageKey"));
-                if(ListName.length()>30){
+                /*if(ListName.length()>30){
                     ListName =ListName.substring(0,10)+ "...";
-                }
+                }*/
                 ListName = i++ + ". " + ListName;
                 array_list.add(new ListVideoObj(ID,"", ListName,ImageKey, Integer.parseInt(getCountVideOfList(res.getString(res.getColumnIndex("ID"))))));
                 res.moveToNext();

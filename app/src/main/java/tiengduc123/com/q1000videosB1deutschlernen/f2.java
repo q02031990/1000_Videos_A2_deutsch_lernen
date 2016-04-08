@@ -1,11 +1,10 @@
-package tiengduc123.com.q8000videosdeutschlernen;
+package tiengduc123.com.q1000videosB1deutschlernen;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,13 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
-
-import tiengduc123.com.q8000videosdeutschlernen.Adapter.AdapterListVideoObject;
-import tiengduc123.com.q8000videosdeutschlernen.Database.DatabaseHelper;
-import tiengduc123.com.q8000videosdeutschlernen.Object.ListVideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.Adapter.AdapterListVideoObject;
+import tiengduc123.com.q1000videosB1deutschlernen.Database.DatabaseHelper;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.ListVideoObj;
 
 public class f2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
@@ -49,17 +49,19 @@ public class f2 extends AppCompatActivity implements NavigationView.OnNavigation
         navigationView.setNavigationItemSelectedListener(this);
 
         loadData();
+        showAds();
     }
+
+    public void showAds(){
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
 
     public void loadData() {
         CategoryID = getIntent().getExtras().getString("CategoryID");
         setTitle(getIntent().getExtras().getString("CategoryName"));
-
-        if(CategoryID == "0"){
-            Intent it = new Intent(this, MainActivity.class);
-            startActivity(it);
-        }
-
         DatabaseHelper dbHelpter = new DatabaseHelper(this);
         //Toast.makeText(getApplicationContext(),dbHelpter.countVideoDetail() + " Videos were loaded", Toast.LENGTH_LONG).show();
         _Cursor = dbHelpter.GetAllNameOfListByID(CategoryID);
@@ -122,8 +124,8 @@ public class f2 extends AppCompatActivity implements NavigationView.OnNavigation
 
         if (id == R.id.nav_Home) {
             //ChuyenManHinhCategory("0","8000 Videos Deutsch lernen");
-            Intent it = new Intent(this, MainActivity.class);
-            startActivity(it);
+           /* Intent it = new Intent(this, MainActivity.class);
+            startActivity(it);*/
 
         }else if (id == R.id.nav_Grammatik) {
             ChuyenManHinhCategory("1","Grammatik");
@@ -132,10 +134,19 @@ public class f2 extends AppCompatActivity implements NavigationView.OnNavigation
             ChuyenManHinhCategory("2","Wortschatz");
 
         } else if (id == R.id.nav_Dialogen) {
-            ChuyenManHinhCategory("2","Diagloge");
+            ChuyenManHinhCategory("3", "Dialog");
 
         } else if (id == R.id.nav_Horen_Text) {
-            ChuyenManHinhCategory("2", "Hören Text");
+            ChuyenManHinhCategory("4", "Hören Text");
+
+        } else if (id == R.id.nav_prufung) {
+            ChuyenManHinhCategory("5", "Prüfung");
+
+        } else if (id == R.id.nav_Dokument) {
+            ChuyenManHinhCategory("6", "Dokument film");
+
+        } else if (id == R.id.nav_Leben) {
+            ChuyenManHinhCategory("7", "Leben");
 
         } else if (id == R.id.nav_share) {
             shareforFriend();
@@ -143,7 +154,31 @@ public class f2 extends AppCompatActivity implements NavigationView.OnNavigation
         } else if (id == R.id.nav_send) {
             Intent browserAbout = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tiengduc123.com"));
             startActivity(browserAbout);
+
+        }else if(id == R.id.nav_rate_app){
+            Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                this.startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                //UtilityClass.showAlertDialog(context, ERROR, "Couldn't launch the market", null, 0);
+            }
+        }else if(id == R.id.nav_app1){
+            Uri uri = Uri.parse("market://details?id=tiengduc123.com.derdiedas");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            this.startActivity(goToMarket);
+        }else if(id == R.id.nav_app2){
+            Uri uri = Uri.parse("market://details?id=com.tiengduc123.deutschlernen.deutschlernen");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            this.startActivity(goToMarket);
+
+        }else if(id == R.id.nav_app3){
+            Uri uri = Uri.parse("market://details?id=tiengduc123.com.DeutschLernenA1");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            this.startActivity(goToMarket);
+
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

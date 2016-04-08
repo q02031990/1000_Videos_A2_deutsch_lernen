@@ -1,4 +1,4 @@
-package tiengduc123.com.q8000videosdeutschlernen.QFile;
+package tiengduc123.com.q1000videosB1deutschlernen.QFile;
 
 import android.content.Context;
 import android.content.Intent;

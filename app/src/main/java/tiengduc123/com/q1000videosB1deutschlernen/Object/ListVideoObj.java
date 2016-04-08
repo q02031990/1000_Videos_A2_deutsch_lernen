@@ -1,4 +1,4 @@
-package tiengduc123.com.q8000videosdeutschlernen.Object;
+package tiengduc123.com.q1000videosB1deutschlernen.Object;
 
 /**
  * Created by Dell on 24/03/2016.

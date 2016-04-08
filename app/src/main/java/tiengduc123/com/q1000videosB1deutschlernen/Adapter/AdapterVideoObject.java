@@ -1,4 +1,4 @@
-package tiengduc123.com.q8000videosdeutschlernen.Adapter;
+package tiengduc123.com.q1000videosB1deutschlernen.Adapter;
 
 
 import android.content.Context;
@@ -13,10 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import tiengduc123.com.q8000videosdeutschlernen.Object.VideoObj;
-import tiengduc123.com.q8000videosdeutschlernen.R;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.VideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.R;
 
-import tiengduc123.com.q8000videosdeutschlernen.R;
 /**
  * Created by Dell on 12/3/2015.
  */
@@ -38,7 +37,7 @@ public class AdapterVideoObject extends ArrayAdapter<VideoObj> {
         if (v == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
-            v = vi.inflate(tiengduc123.com.q8000videosdeutschlernen.R.layout.content_item_video, null);
+            v = vi.inflate(tiengduc123.com.q1000videosB1deutschlernen.R.layout.content_item_video, null);
         }
 
         VideoObj p = getItem(position);

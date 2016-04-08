@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">8000 Videos Deutsch lernen</string>
+    <string name="app_name">1000 Videos B1 Deutsch lernen</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,6 +8,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_f2">f2</string>
+    <string name="title_activity_f2">title_activity_f2</string>
     <string name="title_activity_activity_play">activity_play</string>
+    <string name="banner_ad_unit_id">ca-app-pub-9741809945644056/6202922927</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

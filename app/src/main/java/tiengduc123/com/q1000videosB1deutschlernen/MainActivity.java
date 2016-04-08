@@ -1,12 +1,12 @@
-package tiengduc123.com.q8000videosdeutschlernen;
+package tiengduc123.com.q1000videosB1deutschlernen;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,17 +23,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import tiengduc123.com.q8000videosdeutschlernen.Adapter.AdapterListVideoObject;
-import tiengduc123.com.q8000videosdeutschlernen.Adapter.AdapterVideoObject;
-import tiengduc123.com.q8000videosdeutschlernen.Database.DatabaseHelper;
-import tiengduc123.com.q8000videosdeutschlernen.Object.ListVideoObj;
-import tiengduc123.com.q8000videosdeutschlernen.Object.VideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.Adapter.AdapterListVideoObject;
+import tiengduc123.com.q1000videosB1deutschlernen.Database.DatabaseHelper;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.ListVideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.QFile.AppRater;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ListView lv;
     DatabaseHelper db;
-    String CategoryID, CategoryName;
+    String CategoryID;
+    final static private String PREF_KEY_SHORTCUT_ADDED = "Shortcut war added";
 
     ArrayList<ListVideoObj> _Cursor;
     ArrayList<ListVideoObj> mang;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        createShortcutIcon();// tao icon ngoai man hinh chinh
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,9 +56,17 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        showAds();
         NapDuLieuLenListView();
+        AppRater.app_launched(this);
+
     }
 
+    public void showAds(){
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
 
     public void NapDuLieuLenListView(){
         try {
@@ -66,6 +77,8 @@ public class MainActivity extends AppCompatActivity
         DatabaseHelper dbHelpter = new DatabaseHelper(this);
         //Toast.makeText(getApplicationContext(),dbHelpter.countVideoDetail() + " Videos were loaded", Toast.LENGTH_LONG).show();
         _Cursor = dbHelpter.GetAllNameOfList();//GetAllNameOfListByID(CategoryID);
+
+        Toast.makeText(this,"You have " + dbHelpter.countVideoDetail() + " Videos, We will update more Videos for you :)",Toast.LENGTH_LONG).show();
         ListView listView = (ListView) findViewById(R.id.listView);
 
         mang  = new ArrayList<ListVideoObj>();
@@ -152,8 +165,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_Home) {
             //ChuyenManHinhCategory("0","8000 Videos Deutsch lernen");
-            Intent it = new Intent(this, MainActivity.class);
-            startActivity(it);
+           /* Intent it = new Intent(this, MainActivity.class);
+            startActivity(it);*/
 
         }else if (id == R.id.nav_Grammatik) {
             ChuyenManHinhCategory("1","Grammatik");
@@ -162,10 +175,19 @@ public class MainActivity extends AppCompatActivity
             ChuyenManHinhCategory("2","Wortschatz");
 
         } else if (id == R.id.nav_Dialogen) {
-            ChuyenManHinhCategory("2", "Diagloge");
+            ChuyenManHinhCategory("3", "Dialog");
 
         } else if (id == R.id.nav_Horen_Text) {
-            ChuyenManHinhCategory("2", "Hören Text");
+            ChuyenManHinhCategory("4", "Hören Text");
+
+        } else if (id == R.id.nav_prufung) {
+            ChuyenManHinhCategory("5", "Prüfung");
+
+        } else if (id == R.id.nav_Dokument) {
+            ChuyenManHinhCategory("6", "Dokument film");
+
+        } else if (id == R.id.nav_Leben) {
+            ChuyenManHinhCategory("7", "Leben");
 
         } else if (id == R.id.nav_share) {
             shareforFriend();
@@ -173,7 +195,31 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             Intent browserAbout = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tiengduc123.com"));
             startActivity(browserAbout);
+
+        }else if(id == R.id.nav_rate_app){
+            Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                this.startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                //UtilityClass.showAlertDialog(context, ERROR, "Couldn't launch the market", null, 0);
+            }
+        }else if(id == R.id.nav_app1){
+            Uri uri = Uri.parse("market://details?id=tiengduc123.com.derdiedas");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            this.startActivity(goToMarket);
+        }else if(id == R.id.nav_app2){
+            Uri uri = Uri.parse("market://details?id=com.tiengduc123.deutschlernen.deutschlernen");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            this.startActivity(goToMarket);
+
+        }else if(id == R.id.nav_app3){
+            Uri uri = Uri.parse("market://details?id=tiengduc123.com.DeutschLernenA1");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            this.startActivity(goToMarket);
+
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -242,5 +288,28 @@ public class MainActivity extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void createShortcutIcon() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        boolean shortCutWasAlreadyAdded = sharedPreferences.getBoolean("PREF_KEY_SHORTCUT_ADDED", false);
+        if (shortCutWasAlreadyAdded) return;
+
+        Intent shortcutIntent = new Intent(getApplicationContext(), MainActivity.class);
+        shortcutIntent.setAction(Intent.ACTION_MAIN);
+
+
+        Intent addIntent = new Intent();
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        String app_name = this.getResources().getString(R.string.app_name);
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, app_name);// sua cho nay la ten cua app
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.mipmap.ic_launcher));
+        addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        sendBroadcast(addIntent);
+
+        // Remembering that ShortCut was already added
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("PREF_KEY_SHORTCUT_ADDED", true);
+        editor.commit();
     }
 }

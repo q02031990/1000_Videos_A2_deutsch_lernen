@@ -1,4 +1,4 @@
-package tiengduc123.com.q8000videosdeutschlernen.Database;
+package tiengduc123.com.q1000videosB1deutschlernen.Database;
 
 
 import android.content.Context;

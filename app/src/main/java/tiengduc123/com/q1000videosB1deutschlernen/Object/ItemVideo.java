@@ -1,9 +1,9 @@
-package tiengduc123.com.q8000videosdeutschlernen.Object;
+package tiengduc123.com.q1000videosB1deutschlernen.Object;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import tiengduc123.com.q8000videosdeutschlernen.R;
+import tiengduc123.com.q1000videosB1deutschlernen.R;
 
 public class ItemVideo extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package tiengduc123.com.q8000videosdeutschlernen;
+package tiengduc123.com.q1000videosB1deutschlernen;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tiengduc123.com.DeutschLernenA1.Activity_YoutubePlay">
+    tools:context="tiengduc123.com.q1000videosB1deutschlernen.f2">
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/youtubeplayerview"

@@ -1,4 +1,4 @@
-package tiengduc123.com.q8000videosdeutschlernen.Adapter;
+package tiengduc123.com.q1000videosB1deutschlernen.Adapter;
 
 
 import android.content.Context;
@@ -13,8 +13,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import tiengduc123.com.q8000videosdeutschlernen.Object.ListVideoObj;
-import tiengduc123.com.q8000videosdeutschlernen.R;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.ListVideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.R;
 
 /**
  * Created by Dell on 12/3/2015.
@@ -48,10 +48,10 @@ public class AdapterListVideoObject extends ArrayAdapter<ListVideoObj> {
             nameListVideo.setText(p.getListName());
 
             TextView nameList = (TextView) v.findViewById(R.id.txtNameOfList);
-            nameList.setText(p.getCountVideo() + " Videos");
+            nameList.setText("");
 
             TextView timeVideo = (TextView) v.findViewById(R.id.txtTimeVideo);
-            timeVideo.setText("");
+            timeVideo.setText("Have " + p.getCountVideo() + " Video");
 
             ImageView img = (ImageView) v.findViewById(R.id.imageView);
             Picasso.with(getContext()).load("http://img.youtube.com/vi/" + p.getImageKey() + "/0.jpg").into(img);

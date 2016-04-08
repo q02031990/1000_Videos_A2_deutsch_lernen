@@ -1,6 +1,8 @@
-package tiengduc123.com.q8000videosdeutschlernen;
+package tiengduc123.com.q1000videosB1deutschlernen;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,9 +15,9 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
 
-import tiengduc123.com.q8000videosdeutschlernen.Database.DatabaseHelper;
-import tiengduc123.com.q8000videosdeutschlernen.Adapter.AdapterVideoObject;
-import tiengduc123.com.q8000videosdeutschlernen.Object.VideoObj;
+import tiengduc123.com.q1000videosB1deutschlernen.Database.DatabaseHelper;
+import tiengduc123.com.q1000videosB1deutschlernen.Adapter.AdapterVideoObject;
+import tiengduc123.com.q1000videosB1deutschlernen.Object.VideoObj;
 
 public class activity_play extends YouTubeBaseActivity implements
         YouTubePlayer.OnInitializedListener {
@@ -37,15 +39,29 @@ public class activity_play extends YouTubeBaseActivity implements
         youTubePlayerView.setAlpha(1.0f);
         youTubePlayerView.initialize(API_KEY, this);
         NapDuLieuLenListView();
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent mailer = new Intent(Intent.ACTION_SEND);
+                mailer.setType("message/rfc822");
+                mailer.putExtra(Intent.EXTRA_EMAIL, new String[]{"tiengduc123.com@gmail.com"});
+                mailer.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                mailer.putExtra(Intent.EXTRA_TEXT, "Feedback");
+                startActivity(Intent.createChooser(mailer, "Send email..."));
+            }
+        });
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         _YouTubePlayer = youTubePlayer;
         if (!b) {
-            Bundle bu = getIntent().getExtras();
+            /*Bundle bu = getIntent().getExtras();
             String VideoID = bu.getString("key");
-            _YouTubePlayer.loadVideo(VideoID);
+            _YouTubePlayer.loadVideo(VideoID);*/
+            db = new DatabaseHelper(this);
+            _YouTubePlayer.loadVideo(db.GetVideoObjByList(getIntent().getExtras().getString("ListID")).get(0).key);
         }
     }
 
@@ -89,12 +105,7 @@ public class activity_play extends YouTubeBaseActivity implements
                     R.layout.activity_item_video,
                     mang
             );
-
-
-
             lv.setAdapter(adapter);
-
-
             //load lai list
             adapter.notifyDataSetChanged();
             lv.invalidateViews();

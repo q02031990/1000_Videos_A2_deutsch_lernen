@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "tiengduc123.com.q8000videosdeutschlernen"
+        applicationId "tiengduc123.com.q1000videosdeutschlernen"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -27,4 +27,5 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
 }

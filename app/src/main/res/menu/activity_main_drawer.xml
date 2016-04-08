@@ -5,26 +5,40 @@
 
         <item
             android:id="@+id/nav_Home"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_home"
             android:title="Home Page" />
         <item
             android:id="@+id/nav_Grammatik"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_manage"
             android:title="Grammatik" />
         <item
             android:id="@+id/nav_Wortschaft"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Wortschaft" />
+            android:icon="@drawable/ic_worte"
+            android:title="wortschatz" />
 
         <item
             android:id="@+id/nav_Dialogen"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Dialogen" />
+            android:icon="@drawable/ic_dialoge"
+            android:title="Dialog" />
 
         <item
             android:id="@+id/nav_Horen_Text"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_horen"
             android:title="Hören Text" />
+
+        <item
+            android:id="@+id/nav_prufung"
+            android:icon="@drawable/ic_prufung"
+            android:title="Prüfung B1" />
+
+        <item
+            android:id="@+id/nav_Dokument"
+            android:icon="@drawable/ic_dokument"
+            android:title="Dokument_Film" />
+        <item
+            android:id="@+id/nav_Leben"
+            android:icon="@drawable/ic_leben"
+            android:title="Leben in Deutschland" />
     </group>
 
     <item android:title="Communicate">
@@ -34,12 +48,30 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
+                android:id="@+id/nav_rate_app"
+                android:icon="@drawable/ic_rate_app"
+                android:title="Rate App" />
+            <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_link"
                 android:title="TiengDuc123.com" />
         </menu>
     </item>
 
-
-
+    <item android:title="Application For Learning">
+        <menu>
+            <item
+                android:id="@+id/nav_app1"
+                android:icon="@drawable/ic_app"
+                android:title="Der Die Das Suchen v2" />
+            <item
+                android:id="@+id/nav_app2"
+                android:icon="@drawable/ic_app"
+                android:title="Deutsch Lernen Mit Video" />
+            <item
+                android:id="@+id/nav_app3"
+                android:icon="@drawable/ic_app"
+                android:title="200 Videos A1 Lernen" />
+        </menu>
+    </item>
 </menu>
