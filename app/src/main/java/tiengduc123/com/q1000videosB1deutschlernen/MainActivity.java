@@ -32,11 +32,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener {
     ListView lv;
     DatabaseHelper db;
     String CategoryID;
-    final static private String PREF_KEY_SHORTCUT_ADDED = "Shortcut war added";
+    final static private String PREF_KEY_SHORTCUT_ADDED = " Shortcut war added";
 
     ArrayList<ListVideoObj> _Cursor;
     ArrayList<ListVideoObj> mang;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         //Toast.makeText(getApplicationContext(),dbHelpter.countVideoDetail() + " Videos were loaded", Toast.LENGTH_LONG).show();
         _Cursor = dbHelpter.GetAllNameOfList();//GetAllNameOfListByID(CategoryID);
 
-        Toast.makeText(this,"You have " + dbHelpter.countVideoDetail() + " Videos, We will update more Videos for you :)",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"You have " + dbHelpter.countVideoDetail() + " Videos, We will update more Videos for you :)",Toast.LENGTH_LONG).show();
         ListView listView = (ListView) findViewById(R.id.listView);
 
         mang  = new ArrayList<ListVideoObj>();
@@ -187,7 +187,15 @@ public class MainActivity extends AppCompatActivity
             ChuyenManHinhCategory("6", "Dokument film");
 
         } else if (id == R.id.nav_Leben) {
-            ChuyenManHinhCategory("7", "Leben");
+            ChuyenManHinhCategory("7", "Leben in Deutschland");
+
+        } else if (id == R.id.nav_email) {
+            Intent mailer = new Intent(Intent.ACTION_SEND);
+            mailer.setType("message/rfc822");
+            mailer.putExtra(Intent.EXTRA_EMAIL, new String[]{"tiengduc123.com@gmail.com"});
+            mailer.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+            mailer.putExtra(Intent.EXTRA_TEXT, "Feedback");
+            startActivity(Intent.createChooser(mailer, "Send email..."));
 
         } else if (id == R.id.nav_share) {
             shareforFriend();

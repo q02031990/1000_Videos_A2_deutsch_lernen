@@ -7,38 +7,39 @@
             android:id="@+id/nav_Home"
             android:icon="@drawable/ic_home"
             android:title="Home Page" />
-        <item
-            android:id="@+id/nav_Grammatik"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Grammatik" />
-        <item
-            android:id="@+id/nav_Wortschaft"
-            android:icon="@drawable/ic_worte"
-            android:title="wortschatz" />
 
         <item
             android:id="@+id/nav_Dialogen"
             android:icon="@drawable/ic_dialoge"
-            android:title="Dialog" />
+            android:title="Dialog (645)" />
 
         <item
             android:id="@+id/nav_Horen_Text"
             android:icon="@drawable/ic_horen"
-            android:title="Hören Text" />
+            android:title="Hören Text (295)" />
+        <item
+            android:id="@+id/nav_Grammatik"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Grammatik (354)" />
+        <item
+            android:id="@+id/nav_Wortschaft"
+            android:icon="@drawable/ic_worte"
+            android:title="wortschatz (160)" />
+
 
         <item
             android:id="@+id/nav_prufung"
             android:icon="@drawable/ic_prufung"
-            android:title="Prüfung B1" />
+            android:title="Prüfung B1 (249)" />
 
         <item
             android:id="@+id/nav_Dokument"
             android:icon="@drawable/ic_dokument"
-            android:title="Dokument_Film" />
+            android:title="Dokument Film(149)" />
         <item
             android:id="@+id/nav_Leben"
             android:icon="@drawable/ic_leben"
-            android:title="Leben in Deutschland" />
+            android:title="Leben in Deutschland(400)" />
     </group>
 
     <item android:title="Communicate">
@@ -55,6 +56,10 @@
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_link"
                 android:title="TiengDuc123.com" />
+            <item
+                android:id="@+id/nav_email"
+                android:icon="@drawable/ic_email"
+                android:title="YOUR FEEDBACK" />
         </menu>
     </item>
 

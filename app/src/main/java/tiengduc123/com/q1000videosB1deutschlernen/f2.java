@@ -146,7 +146,15 @@ public class f2 extends AppCompatActivity implements NavigationView.OnNavigation
             ChuyenManHinhCategory("6", "Dokument film");
 
         } else if (id == R.id.nav_Leben) {
-            ChuyenManHinhCategory("7", "Leben");
+            ChuyenManHinhCategory("7", "Leben in Deutschland");
+
+        } else if (id == R.id.nav_email) {
+            Intent mailer = new Intent(Intent.ACTION_SEND);
+            mailer.setType("message/rfc822");
+            mailer.putExtra(Intent.EXTRA_EMAIL, new String[]{"tiengduc123.com@gmail.com"});
+            mailer.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+            mailer.putExtra(Intent.EXTRA_TEXT, "Feedback");
+            startActivity(Intent.createChooser(mailer, "Send email..."));
 
         } else if (id == R.id.nav_share) {
             shareforFriend();

@@ -51,7 +51,7 @@ public class AdapterListVideoObject extends ArrayAdapter<ListVideoObj> {
             nameList.setText("");
 
             TextView timeVideo = (TextView) v.findViewById(R.id.txtTimeVideo);
-            timeVideo.setText("Have " + p.getCountVideo() + " Video");
+            timeVideo.setText(p.getCountVideo() + " Videos");
 
             ImageView img = (ImageView) v.findViewById(R.id.imageView);
             Picasso.with(getContext()).load("http://img.youtube.com/vi/" + p.getImageKey() + "/0.jpg").into(img);
