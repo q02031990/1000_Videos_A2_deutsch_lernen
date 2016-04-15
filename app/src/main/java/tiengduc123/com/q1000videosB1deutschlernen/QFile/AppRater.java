@@ -19,8 +19,8 @@ public class AppRater {
     private static String APP_TITLE;// App Name
     private static String APP_PNAME ;//"com.example.name";// Package Name
 
-    private final static int DAYS_UNTIL_PROMPT = 3;//Min number of days
-    private final static int LAUNCHES_UNTIL_PROMPT = 3;//Min number of launches
+    private final static int DAYS_UNTIL_PROMPT = 1;//Min number of days
+    private final static int LAUNCHES_UNTIL_PROMPT = 1;//Min number of launches
 
     private Context context;
     public void AppRater(Context context){
@@ -65,13 +65,13 @@ public class AppRater {
         ll.setOrientation(LinearLayout.VERTICAL);
 
         TextView tv = new TextView(mContext);
-        tv.setText("If you enjoy using " + APP_TITLE + ", please take a moment to rate it. Thanks for your support!");
+        tv.setText("If you enjoy using my app, please take a moment to rate it. Thanks for your support!");
         tv.setWidth(240);
         tv.setPadding(4, 0, 4, 10);
         ll.addView(tv);
 
         Button b1 = new Button(mContext);
-        b1.setText("Rate " + APP_TITLE);
+        b1.setText("Rate us");
         b1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + APP_PNAME)));

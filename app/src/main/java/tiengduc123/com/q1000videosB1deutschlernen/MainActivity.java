@@ -1,12 +1,20 @@
 package tiengduc123.com.q1000videosB1deutschlernen;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -30,9 +38,12 @@ import tiengduc123.com.q1000videosB1deutschlernen.QFile.AppRater;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
     ListView lv;
     DatabaseHelper db;
     String CategoryID;
@@ -40,6 +51,13 @@ public class MainActivity extends AppCompatActivity
 
     ArrayList<ListVideoObj> _Cursor;
     ArrayList<ListVideoObj> mang;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,19 +77,19 @@ public class MainActivity extends AppCompatActivity
         showAds();
         NapDuLieuLenListView();
         AppRater.app_launched(this);
-
+        //showNotification();
     }
 
-    public void showAds(){
+    public void showAds() {
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
 
-    public void NapDuLieuLenListView(){
+    public void NapDuLieuLenListView() {
         try {
             CategoryID = getIntent().getExtras().getString("CategoryID");
-        }catch (Exception ex){
+        } catch (Exception ex) {
             CategoryID = "1";
         }
         DatabaseHelper dbHelpter = new DatabaseHelper(this);
@@ -81,13 +99,13 @@ public class MainActivity extends AppCompatActivity
         //Toast.makeText(this,"You have " + dbHelpter.countVideoDetail() + " Videos, We will update more Videos for you :)",Toast.LENGTH_LONG).show();
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        mang  = new ArrayList<ListVideoObj>();
+        mang = new ArrayList<ListVideoObj>();
 
 
         for (int i = 0; i < _Cursor.size(); i++) {
             String title = _Cursor.get(i).getListName();
-            if(title.length()>30){
-                title = title.substring(0,30)+ "...";
+            if (title.length() > 30) {
+                title = title.substring(0, 30) + "...";
             }
             mang.add(new ListVideoObj(
                     _Cursor.get(i).getID(),
@@ -144,8 +162,7 @@ public class MainActivity extends AppCompatActivity
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Exit Application")
                     .setMessage("Are you sure you want to close this activity?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                    {
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
@@ -168,11 +185,11 @@ public class MainActivity extends AppCompatActivity
            /* Intent it = new Intent(this, MainActivity.class);
             startActivity(it);*/
 
-        }else if (id == R.id.nav_Grammatik) {
-            ChuyenManHinhCategory("1","Grammatik");
+        } else if (id == R.id.nav_Grammatik) {
+            ChuyenManHinhCategory("1", "Grammatik");
 
         } else if (id == R.id.nav_Wortschaft) {
-            ChuyenManHinhCategory("2","Wortschatz");
+            ChuyenManHinhCategory("2", "Wortschatz");
 
         } else if (id == R.id.nav_Dialogen) {
             ChuyenManHinhCategory("3", "Dialog");
@@ -204,7 +221,7 @@ public class MainActivity extends AppCompatActivity
             Intent browserAbout = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tiengduc123.com"));
             startActivity(browserAbout);
 
-        }else if(id == R.id.nav_rate_app){
+        } else if (id == R.id.nav_rate_app) {
             Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             try {
@@ -212,16 +229,16 @@ public class MainActivity extends AppCompatActivity
             } catch (ActivityNotFoundException e) {
                 //UtilityClass.showAlertDialog(context, ERROR, "Couldn't launch the market", null, 0);
             }
-        }else if(id == R.id.nav_app1){
+        } else if (id == R.id.nav_app1) {
             Uri uri = Uri.parse("market://details?id=tiengduc123.com.derdiedas");
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             this.startActivity(goToMarket);
-        }else if(id == R.id.nav_app2){
+        } else if (id == R.id.nav_app2) {
             Uri uri = Uri.parse("market://details?id=com.tiengduc123.deutschlernen.deutschlernen");
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             this.startActivity(goToMarket);
 
-        }else if(id == R.id.nav_app3){
+        } else if (id == R.id.nav_app3) {
             Uri uri = Uri.parse("market://details?id=tiengduc123.com.DeutschLernenA1");
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             this.startActivity(goToMarket);
@@ -235,8 +252,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     //share app
-    public void shareforFriend(){
-        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+    public void shareforFriend() {
+        Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
@@ -247,28 +264,27 @@ public class MainActivity extends AppCompatActivity
         startActivity(Intent.createChooser(share, "Share link!"));
     }
 
-    /****Tao Menu*************************************/
+    /****
+     * Tao Menu
+     *************************************/
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.menu_app:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=TiengDuc123"));
                 startActivity(browserIntent);
                 return true;
 
             case R.id.menu_share:
-                Intent share = new Intent(android.content.Intent.ACTION_SEND);
+                Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
                 share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
@@ -320,4 +336,44 @@ public class MainActivity extends AppCompatActivity
         editor.putBoolean("PREF_KEY_SHORTCUT_ADDED", true);
         editor.commit();
     }
+/*
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://tiengduc123.com.q1000videosB1deutschlernen/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://tiengduc123.com.q1000videosB1deutschlernen/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }*/
 }
